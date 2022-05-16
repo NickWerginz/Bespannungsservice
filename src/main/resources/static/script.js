@@ -1,19 +1,22 @@
 var Person = /** @class */ (function () {
-    function Person(id, name, vorname, mail, telefon, saite, bespannungshärte, dauer, beseitungsbild, abgabe) {
+    function Person(id, name, vorname, mail, telefon, saite, dauer, abgabe, bespannungLängs, bespannungQuer, preis) {
         this.id = id;
         this.name = name;
         this.vorname = vorname;
         this.mail = mail;
         this.telefon = telefon;
         this.saite = saite;
-        this.bespannungshärte = bespannungshärte;
         this.dauer = dauer;
-        this.beseitungsbild = beseitungsbild;
         this.abgabe = abgabe;
+        this.bespannungLängs = bespannungLängs;
+        this.bespannungQuer = bespannungQuer;
+        this.preis = preis;
     }
     return Person;
 }());
 var allData;
+var vollPreis;
+vollPreis = 0;
 // loadData(); //Daten sofort laden
 //document.getElementById("btnDeletePerson").onclick = deletePerson;
 /*function loadData(){
@@ -105,19 +108,47 @@ function closePersonDialog() {
 }
 
  */
+function preisBerechnen() {
+    if (document.getElementById("pSaite").value === "Luxilon Adrenaline Century") {
+        vollPreis = 0;
+        vollPreis += 30;
+    }
+    if (document.getElementById("pSaite").value === "Babolat RPM Blast") {
+        vollPreis = 0;
+        vollPreis += 35;
+    }
+    if (document.getElementById("pSaite").value === "eigene") {
+        vollPreis = 0;
+        vollPreis += 20;
+    }
+    if (document.getElementById("pDauer").value === "2 Tage") {
+        vollPreis += 10;
+    }
+    if (document.getElementById("pDauer").value === "5 Tage") {
+        vollPreis += 5;
+    }
+    document.getElementById("preisOutput").value = vollPreis.toString() + "Fr.";
+}
 function savePerson(evt) {
     console.log("hallo");
-    evt.preventDefault();
-    console.log("changePerson");
     var id = null;
     var strMethod = "POST";
     var data = null;
     var url = "http://localhost:8080/person/post";
-    data = new Person(id, document.getElementById("pVorname").value, document.getElementById("pNachname").value, document.getElementById("pEmail").value, Number(document.getElementById("pTelefon").value), document.getElementById("pSaite").value, Number(document.getElementById("pBlängs").value), Number(document.getElementById("pBquer").value), Number(document.getElementById("pDauer").value), document.getElementById("pAbgabe").value);
-    fetch(url, { method: strMethod, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-        .then(function (response) { return response.json(); })
-        .then(function (obj) { return savePersonCallback(obj); })
-        .catch(function (error) { return console.log(error); });
+    data = new Person(id, document.getElementById("pNachname").value, document.getElementById("pVorname").value, document.getElementById("pEmail").value, Number(document.getElementById("pTelefon").value), document.getElementById("pSaite").value, (document.getElementById("pDauer").value), (document.getElementById("pAbgabe").value), Number(document.getElementById("pBlängs").value), Number(document.getElementById("pBquer").value), vollPreis);
+    var data3 = new Person("", "", "", "", null, "", null, "", null, null, null);
+    if (document.getElementById("pNachname").value === "" ||
+        document.getElementById("pVorname").value === "" ||
+        document.getElementById("pEmail").value === "") {
+        alert("Bitte füllen Sie alle Daten aus");
+        evt.preventDefault();
+    }
+    else {
+        fetch(url, { method: strMethod, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+            .then(function (response) { return response.json(); })
+            .then(function (obj) { return savePersonCallback(obj); })
+            .catch(function (error) { return console.log(error); });
+    }
 }
 function savePersonCallback(obj) {
     var data = obj;

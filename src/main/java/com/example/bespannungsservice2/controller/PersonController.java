@@ -21,15 +21,7 @@ public class PersonController {
     public PersonController(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
-
-    @GetMapping("") public List<Person> getPerson() {
-            return personRepository.findAll();
-        }
-
-        @GetMapping("/{id}") public Optional<Person> getPersonById(@PathVariable Long id) {
-            return personRepository.findById(id);
-        }
-        @PostMapping("/post")public Person createCustomer(@RequestBody Person newPerson) {
+        @PostMapping("/post")public Person createPerson(@RequestBody Person newPerson) {
             System.out.println("Post Request");
             log.fatal("Post Request");
         return personRepository.save(newPerson);

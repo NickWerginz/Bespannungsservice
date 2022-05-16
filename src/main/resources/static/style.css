@@ -2,6 +2,22 @@
     font-family: ModernLove;
 }
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
 .imgrechts {
     position: relative;
     float: left;
@@ -26,7 +42,6 @@ header {
     border: black;
     border-style: ridge;
     background-color: white;
-    background-image: url("../../../../../../../../../../xampp/htdocs/brackets/Bespannungsservice/tennis1.jpg");
 }
 
 .title {

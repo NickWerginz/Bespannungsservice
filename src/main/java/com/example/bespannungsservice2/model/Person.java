@@ -23,4 +23,5 @@ public class Person {
     private int bespannungQuer;
     private String dauer;
     private String abgabe;
+    private int preis;
 }

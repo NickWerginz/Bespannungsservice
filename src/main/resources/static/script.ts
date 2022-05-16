@@ -5,26 +5,29 @@ class Person{
     private mail: string;
     private telefon: number;
     private saite: string;
-    private bespannungshärte: number;
-    private dauer: number;
-    private beseitungsbild: number;
+    private dauer: string;
     private abgabe: string;
+    private bespannungLängs: number;
+    private bespannungQuer: number;
+    private preis: number;
 
-
-    constructor(id: string, name: string, vorname: string, mail: string, telefon: number, saite: string, bespannungshärte: number, dauer: number, beseitungsbild: number, abgabe: string) {
+    constructor(id: string, name: string, vorname: string, mail: string, telefon: number, saite: string, dauer: string, abgabe: string, bespannungLängs: number, bespannungQuer: number, preis: number) {
         this.id = id;
         this.name = name;
         this.vorname = vorname;
         this.mail = mail;
         this.telefon = telefon;
         this.saite = saite;
-        this.bespannungshärte = bespannungshärte;
         this.dauer = dauer;
-        this.beseitungsbild = beseitungsbild;
         this.abgabe = abgabe;
+        this.bespannungLängs = bespannungLängs;
+        this.bespannungQuer = bespannungQuer;
+        this.preis = preis;
     }
 }
 var allData;
+let vollPreis: number;
+vollPreis = 0;
 // loadData(); //Daten sofort laden
 
 //document.getElementById("btnDeletePerson").onclick = deletePerson;
@@ -122,37 +125,65 @@ function closePersonDialog() {
 }
 
    */
-
+function preisBerechnen() {
+   if ((<HTMLInputElement> document.getElementById("pSaite")).value === "Luxilon Adrenaline Century"){
+       vollPreis = 0;
+       vollPreis += 30;
+   }
+    if ((<HTMLInputElement> document.getElementById("pSaite")).value === "Babolat RPM Blast") {
+        vollPreis = 0;
+        vollPreis += 35;
+    }
+    if ((<HTMLInputElement> document.getElementById("pSaite")).value === "eigene") {
+        vollPreis = 0;
+        vollPreis += 20;
+    }
+    if ((<HTMLInputElement> document.getElementById("pDauer")).value === "2 Tage") {
+        vollPreis += 10;
+    }
+    if ((<HTMLInputElement> document.getElementById("pDauer")).value === "5 Tage") {
+        vollPreis += 5;
+    }
+    (<HTMLInputElement>document.getElementById("preisOutput")).value = vollPreis.toString() + "Fr."
+}
 
 function savePerson(evt){
+
     console.log("hallo")
-    evt.preventDefault();
-    console.log("changePerson");
     let id: string = null
     let strMethod: string = "POST";
     let data: Person = null;
     const url: string = "http://localhost:8080/person/post";
 
 
-
     data = new Person(id,
-        (<HTMLInputElement>document.getElementById("pVorname")).value,
-    (<HTMLInputElement> document.getElementById("pNachname")).value,
+        (<HTMLInputElement>document.getElementById("pNachname")).value,
+    (<HTMLInputElement> document.getElementById("pVorname")).value,
     (<HTMLInputElement> document.getElementById("pEmail")).value,
     Number((<HTMLInputElement>document.getElementById("pTelefon")).value),
     (<HTMLInputElement> document.getElementById("pSaite")).value,
+    ((<HTMLInputElement>document.getElementById("pDauer")).value),
+    ((<HTMLInputElement>document.getElementById("pAbgabe")).value),
     Number((<HTMLInputElement>document.getElementById("pBlängs")).value),
     Number((<HTMLInputElement>document.getElementById("pBquer")).value),
-    Number((<HTMLInputElement>document.getElementById("pDauer")).value),
-    (<HTMLInputElement> document.getElementById("pAbgabe")).value
+        vollPreis
     );
 
+    let data3 = new Person ("","","","",null,"",null,
+      "",null,null,null)
 
+if ((<HTMLInputElement>document.getElementById("pNachname")).value === "" ||
+    (<HTMLInputElement>document.getElementById("pVorname")).value === "" ||
+    (<HTMLInputElement>document.getElementById("pEmail")).value === "" ){
+    alert("Bitte füllen Sie alle Daten aus");
+    evt.preventDefault()
+} else {
 
-    fetch (url,{method:strMethod, headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+    fetch(url, {method: strMethod, headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
         .then(response => response.json())
         .then(obj => savePersonCallback(obj))
         .catch(error => console.log(error));
+}
 }
 
 function savePersonCallback(obj){

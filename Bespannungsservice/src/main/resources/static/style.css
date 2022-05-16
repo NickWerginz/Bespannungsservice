@@ -1,0 +1,310 @@
+@font-face {
+    font-family: ModernLove;
+}
+
+.imgrechts {
+    position: relative;
+    float: left;
+    height: 80px;
+    margin-top: -60px;
+
+}
+
+body {
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 150px 50px auto;
+    grid-gap: 10px;
+    background-color: grey;
+    padding: 10px;
+}
+
+header {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    box-shadow: 5px 5px 10px dimgray;
+    border: black;
+    border-style: ridge;
+    background-color: white;
+    background-image: url("../../../../../../../../../../xampp/htdocs/brackets/Bespannungsservice/tennis1.jpg");
+}
+
+.title {
+    font-size: 70pt;
+    padding-left: 40px;
+    padding-top: 10px;
+    font-family: ModernLove;
+    color: darkgray;
+    float: left;
+}
+
+
+header img {
+    position: relative;
+    float: right;
+    height: 190px;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+header p {
+    font-size: 90px;
+    font-family: ModernLove;
+    color: black;
+    padding-left: 750px;
+    font-family: ModernLove;
+}
+
+.red {
+    color: #ff0000;
+}
+
+.green {
+    color: #92d050;
+}
+
+.blue {
+    color: #00b0f0;
+}
+
+nav {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    display: block;
+    border: black;
+    border-style: ridge;
+    background-color: white;
+    box-shadow: 5px 5px 10px dimgray;
+
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+nav li {
+    float: left;
+
+}
+
+nav li a {
+    display: block;
+    padding: 8px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+nav li a:hover {
+    color: grey;
+}
+
+main {
+    grid-row: 3;
+    grid-column: 2;
+    border: black;
+    border-style: ridge;
+    box-shadow: 5px 5px 10px dimgray;
+    background-color: white;
+    padding: 20px;
+}
+
+main p {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    padding: 10px;
+}
+
+main h2 {
+    font-family: Varela;
+    color: black;
+    padding-left: 10px;
+}
+
+main form {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    display: grid;
+    grid-template-columns: 200px 393px;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.age {
+    width: 60px;
+}
+
+.zTitle {
+    font-size: 20px;
+}
+
+main video {
+    float: right;
+    padding-right: 50px;
+}
+
+main form input, main form label {
+    line-height: 30px;
+}
+
+main form textarea {
+    height: 200px;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+.date{
+    width: 150px;
+}
+
+input[type="submit"] {
+    color: rgb(250, 250, 250);
+    background: rgb(14, 72, 120);
+    font-size: 12pt;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px grey;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover, input[type="submit"]:active {
+    background: lightskyblue;
+    box-shadow: 5px 5px 5px grey;
+}
+
+aside {
+    grid-row: 3;
+    grid-column: 1;
+    box-shadow: 5px 5px 10px dimgray;
+    border: black;
+    border-style: ridge;
+    font-size: 10pt;
+    padding: 20px;
+    background-color: white;
+
+}
+
+aside h2 {
+    font-family: Varela;
+    color: black;
+}
+
+
+footer {
+    grid-column: 1 / span 2;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border: black;
+    border-style: ridge;
+    background-color: white;
+    color: black;
+    box-shadow: 5px 5px 10px dimgray;
+    margin-bottom: 10px;
+
+
+
+}
+
+footer div {
+    font-family: "Segoe UI";
+    font-size: 8pt;
+    padding: 10px;
+}
+footerRight{
+    float: left;
+}
+
+.btn-primary {
+    background-color: white;
+    border: white;
+    color: black;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    border: white;
+    color: #00b0f0;
+}
+
+.btn-primary:focus {
+    background-color: white;
+    color: #00b0f0;
+}
+
+@media (max-width: 825px) {
+    body {
+        padding: 10px;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 250px 300px auto 200px 50px;
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "aside"
+            "footer";
+        grid-row-gap: 10px;
+    }
+
+    header {
+        grid-area: header;
+    }
+
+    header img {
+        display: none;
+    }
+
+    nav {
+        grid-area: nav;
+    }
+
+    nav a {
+        padding-left: 10px;
+        text-decoration: none;
+        color: black;
+        display: block;
+        line-height: 25px;
+    }
+
+    nav a::before {
+        content: "";
+    }
+
+    nav a::after {
+        content: "";
+    }
+
+    main {
+        grid-area: main;
+    }
+
+    aside {
+        grid-area: aside;
+
+    }
+
+    footer {
+        grid-area: footer;
+
+    }
+
+    footer img {
+        display: inline;
+        position: relative;
+        height: 70px;
+        float: right;
+        margin-right: -5px;
+        margin-top: -15px;
+        margin-bottom: -15px;
+    }
+
+    .ausblenden {
+        display: none;
+    }
+
+}
